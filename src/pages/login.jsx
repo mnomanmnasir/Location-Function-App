@@ -13,7 +13,7 @@ import {
 
   Checkbox,
 } from '@mui/material';
-import { Google, VisibilityOff, Visibility } from '@mui/icons-material';
+import { Google, Facebook, Apple, VisibilityOff, Visibility } from '@mui/icons-material';
 import CustomTextField from '../components/UI/CustomTextField';
 import bgImage from '../assets/bg-login-img.png';
 import CustomButton from '../components/UI/CustomButton';
@@ -126,149 +126,9 @@ const Login = () => {
         </Box>
 
         {/* Social Login Buttons */}
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px', mb: 3 }}>
-          <Button
-            fullWidth
-            variant="outlined"
-            startIcon={<Google sx={{ width: 20, height: 20 }} />}
-            sx={{
-              height: '40px',
-              borderRadius: '20px',
-              borderColor: '#dadce0',
-              color: '#3c4043',
-              textTransform: 'none',
-              fontSize: '14px',
-              fontWeight: 500,
-              fontFamily: 'Roboto, Arial, sans-serif',
-              backgroundColor: 'white',
-              '&:hover': {
-                backgroundColor: 'rgba(66, 133, 244, 0.04)',
-                borderColor: '#d2e3fc',
-              },
-              '& .MuiButton-startIcon': {
-                position: 'absolute',
-                left: '12px',
-                '& > *': {
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '20px',
-                  height: '20px',
-                  overflow: 'visible'
-                }
-              }
-            }}
-          >
-            Continue with Google
-          </Button>
 
-          <Button
-            fullWidth
-            variant="outlined"
-            startIcon={
-              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '20px', height: '20px', overflow: 'visible' }}>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M10 0C4.477 0 0 4.477 0 10C0 15.523 4.477 20 10 20C15.523 20 20 15.523 20 10C20 4.477 15.523 0 10 0Z" fill="#1877F2" />
-                  <path d="M13.5 10.25C13.5 9.01 12.66 8 11.5 8H9.5V12.5H11.5C12.66 12.5 13.5 11.49 13.5 10.25Z" fill="white" />
-                  <path d="M11.5 8H9.5V12.5H11.5C12.66 12.5 13.5 11.49 13.5 10.25C13.5 9.01 12.66 8 11.5 8Z" fill="white" />
-                </svg>
-              </Box>
-            }
-            sx={{
-              height: '40px',
-              borderRadius: '20px',
-              borderColor: '#dadce0',
-              color: '#3c4043',
-              textTransform: 'none',
-              fontSize: '14px',
-              fontWeight: 500,
-              fontFamily: 'Roboto, Arial, sans-serif',
-              backgroundColor: 'white',
-              '&:hover': {
-                backgroundColor: 'rgba(24, 119, 242, 0.04)',
-                borderColor: '#d2e3fc',
-              },
-              '& .MuiButton-startIcon': {
-                position: 'absolute',
-                left: '12px',
-                '& > *': {
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '20px',
-                  height: '20px',
-                  overflow: 'visible'
-                }
-              }
-            }}
-          >
-            Continue with Facebook
-          </Button>
 
-          <Button
-            fullWidth
-            variant="outlined"
-            startIcon={
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.67 15.63 16.89 16.83 15.72 17.62V20.34H19.28C21.36 18.42 22.56 15.6 22.56 12.25Z" fill="#4285F4" />
-                <path d="M12 23C14.97 23 17.46 22.02 19.28 20.34L15.72 17.62C14.74 18.27 13.48 18.75 12 18.75C9.14 18.75 6.71 16.88 5.86 14.27H2.18V17.05C3.99 20.59 7.7 23 12 23Z" fill="#34A853" />
-                <path d="M5.86 14.27C5.46 13.09 5.46 11.83 5.86 10.65V7.87H2.18C0.79 10.58 0.79 13.65 2.18 16.36L5.86 14.27Z" fill="#FBBC05" />
-                <path d="M12 5.25C13.53 5.25 14.91 5.8 15.98 6.88L19.36 3.5C17.45 1.69 14.96 0.5 12 0.5C7.7 0.5 3.99 2.9 2.18 6.87L5.86 9.96C6.71 7.35 9.14 5.25 12 5.25Z" fill="#EA4335" />
-              </svg>
-            }
-            sx={{
-              height: '40px',
-              borderRadius: '20px',
-              borderColor: '#dadce0',
-              color: '#3c4043',
-              textTransform: 'none',
-              fontSize: '14px',
-              fontWeight: 500,
-              fontFamily: 'Roboto, Arial, sans-serif',
-              backgroundColor: 'white',
-              '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.04)',
-                borderColor: '#d2e3fc',
-              },
-              '& .MuiButton-startIcon': {
-                position: 'absolute',
-                left: '12px',
-                '& > *': {
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '20px',
-                  height: '20px',
-                  overflow: 'visible'
-                }
-              }
-            }}
-          >
-            Continue with Apple
-          </Button>
-        </Box>
 
-        {/* Divider with "or" */}
-        <Box sx={{ position: 'relative', my: 2 }}>
-          <Divider sx={{ borderColor: '#e0e0e0' }}>
-            <Box
-              component="span"
-              sx={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                px: 2,
-                bgcolor: 'white',
-                color: '#5f6368',
-                fontSize: '14px',
-                fontFamily: 'Roboto, Arial, sans-serif'
-              }}
-            >
-              or
-            </Box>
-          </Divider>
-        </Box>
 
         {/* Email Field */}
         <CustomTextField
@@ -289,7 +149,7 @@ const Login = () => {
           placeholder="Enter your password"
         />
 
-        <Box sx={{ mt: 1, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <FormControlLabel
             control={
               <Checkbox
@@ -298,7 +158,7 @@ const Login = () => {
                 size="small"
                 sx={{
                   color: '#5f6368',
-                  p: '4px',
+                  // p: '4px',
                   '&.Mui-checked': {
                     color: '#1a73e8',
                   },
@@ -314,7 +174,7 @@ const Login = () => {
                 Keep me signed in
               </Typography>
             }
-            sx={{ m: 0 }}
+          // sx={{ m: 0 }}
           />
           <Link
             href="#"
@@ -334,9 +194,9 @@ const Login = () => {
         </Box>
 
         {/* Sign In Button */}
-        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', mt: 3 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
           <CustomButton
-            type="submit" 
+            type="submit"
             variant="contained"
             fullWidth
             sx={{
@@ -349,6 +209,164 @@ const Login = () => {
           >
             Sign in
           </CustomButton>
+        </Box>
+
+        {/* Divider with text */}
+        <Box sx={{ textAlign: 'center', mb: 1 }}>
+       
+          <Typography variant="body2" color="#000">
+            Don't have an account? <Link href="#" sx={{ color: '#1a73e8' }}>Sign up</Link>
+          </Typography>
+        </Box>
+        <Box sx={{ position: 'relative', my: 1 }}>
+          <Divider sx={{ borderColor: '#e0e0e0' }}>
+            <Box
+              component="span"
+              sx={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                px: 2,
+              backgroundColor: 'white',
+                color: '#5f6368',
+                fontSize: '14px',
+                fontFamily: 'Roboto, Arial, sans-serif'
+              }}
+            >
+              or
+            </Box>
+          </Divider>
+        </Box>
+
+        {/* Social Icon */}
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: '12px', mb: 3 }}>
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25C22.56 11.47 22.49 10.72 22.36 10H12V14.26H17.92C17.67 15.63 16.89 16.83 15.72 17.62V20.34H19.28C21.36 18.42 22.56 15.6 22.56 12.25Z" fill="#4285F4" />
+                <path d="M12 23C14.97 23 17.46 22.02 19.28 20.34L15.72 17.62C14.74 18.27 13.48 18.75 12 18.75C9.14 18.75 6.71 16.88 5.86 14.27H2.18V17.05C3.99 20.59 7.7 23 12 23Z" fill="#34A853" />
+                <path d="M5.86 14.27C5.46 13.09 5.46 11.83 5.86 10.65V7.87H2.18C0.79 10.58 0.79 13.65 2.18 16.36L5.86 14.27Z" fill="#FBBC05" />
+                <path d="M12 5.25C13.53 5.25 14.91 5.8 15.98 6.88L19.36 3.5C17.45 1.69 14.96 0.5 12 0.5C7.7 0.5 3.99 2.9 2.18 6.87L5.86 9.96C6.71 7.35 9.14 5.25 12 5.25Z" fill="#EA4335" />
+              </svg>
+            }
+            sx={{
+              height: '40px',
+              borderRadius: '10px',
+              borderColor: '#dadce0',
+              color: '#000',
+              textTransform: 'none',
+              fontSize: '14px',
+              // fontWeight: 'bold',
+              fontFamily: 'Roboto, Arial, sans-serif',
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                borderColor: '#d2e3fc',
+              },
+              '& .MuiButton-startIcon': {
+                margin: 0,
+                marginRight: '8px',
+                '& > *': {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '20px',
+                  height: '20px',
+                  overflow: 'visible'
+                }
+              }
+            }}
+          >
+            Continue with Google
+          </Button>
+
+
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={
+              <Apple sx={{ color: '#000' }} />
+            }
+            sx={{
+              height: '40px',
+              borderRadius: '10px',
+              borderColor: '#dadce0',
+              // color: '#3c4043',
+              color: '#000000',
+
+              textTransform: 'none',
+              fontSize: '14px',
+              // fontWeight: 'bold',
+              fontFamily: 'Roboto, Arial, sans-serif',
+              backgroundColor: 'white',
+              '&:hover': {
+                backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                borderColor: '#d2e3fc',
+              },
+              '& .MuiButton-startIcon': {
+                margin: 0,
+                marginRight: '8px',
+                '& > *': {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '20px',
+                  height: '20px',
+                  overflow: 'visible'
+                }
+              }
+            }}
+          >
+            Continue with Apple
+          </Button>
+
+          <Button
+            fullWidth
+            variant="outlined"
+            startIcon={
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 12.06C22 6.57 17.5 2.06 12 2.06C6.5 2.06 2 6.57 2 12.06C2 16.98 5.66 21.03 10.38 21.8V14.81H7.9V12.06H10.38V9.91C10.38 7.43 11.86 6.06 14.1 6.06C15.17 6.06 16.29 6.26 16.29 6.26V8.56H15.04C13.83 8.56 13.48 9.26 13.48 9.98V12.06H16.16L15.73 14.81H13.48V21.8C18.34 21.03 22 16.98 22 12.06Z" fill="#1877F2" />
+              </svg>
+            }
+            sx={{
+              height: '40px',
+              borderRadius: '10px',
+              borderColor: '#dadce0',
+              color: '#000000',
+              textTransform: 'none',
+              fontSize: '14px',
+              // fontWeight: 'bold',
+              fontFamily: 'Roboto, Arial, sans-serif',
+              backgroundColor: 'white',
+              display: 'flex',
+              justifyContent: 'center',
+
+              '&:hover': {
+                backgroundColor: 'rgba(24, 119, 242, 0.04)',
+                borderColor: '#d2e3fc',
+              },
+              '& .MuiButton-startIcon': {
+                margin: 0,
+                marginRight: '8px',
+                '& > *': {
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '20px',
+                  height: '20px',
+                  overflow: 'visible'
+                }
+              }
+            }}
+          >
+            Continue with Facebook
+          </Button>
+
         </Box>
       </Box>
 
@@ -443,9 +461,9 @@ const Login = () => {
         </Box>
 
         {/* Sign In Button */}
-        <Box sx={{ width: '100%', mt: 3 }}>
+        <Box sx={{ width: '100%' }}>
           <CustomButton
-            type="submit" 
+            type="submit"
             variant="contained"
             fullWidth
             sx={{
@@ -459,6 +477,8 @@ const Login = () => {
           </CustomButton>
         </Box>
       </Box>
+
+
     </Box>
   );
 };
