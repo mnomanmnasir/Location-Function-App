@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Typography,
@@ -114,7 +114,7 @@ const Login = () => {
           <Typography
             variant="subtitle1"
             sx={{
-              color: '#202124',
+              color: 'text.secondary',
               fontSize: '16px',
               fontWeight: 400,
               mb: 3,
@@ -215,7 +215,7 @@ const Login = () => {
         <Box sx={{ textAlign: 'center', mb: 1 }}>
        
           <Typography variant="body2" color="#000">
-            Don't have an account? <Link href="#" sx={{ color: '#1a73e8' }}>Sign up</Link>
+            Don't have an account? <Link component={RouterLink} to="/signup" sx={{ color: '#1a73e8' }}>Sign up</Link>
           </Typography>
         </Box>
         <Box sx={{ position: 'relative', my: 1 }}>
