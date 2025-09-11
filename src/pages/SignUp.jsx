@@ -209,20 +209,39 @@ const SignUp = () => {
 
                 {/* Sign Up Button */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                    <CustomButton
-                        type="submit"
-                        variant="contained"
-                        fullWidth
-                        sx={{
-                            maxWidth: '200px',
-                            backgroundColor: '#1a73e8',
+                    <Link 
+                        component={RouterLink}
+                        to="/verification-code"
+                        sx={{ 
+                            width: '100%',
+                            maxWidth: '500px',
+                            textDecoration: 'none',
                             '&:hover': {
-                                backgroundColor: '#1b66c9',
+                                textDecoration: 'none'
                             }
                         }}
                     >
-                      <Link component={RouterLink} to="/verification-code" sx={{ color: '#fff' }}>Create Account</Link>
-                    </CustomButton>
+                        <CustomButton
+                            type="button"
+                            variant="contained"
+                            fullWidth
+                            sx={{
+                                py: 1.5,
+                                borderRadius: '8px',
+                                textTransform: 'none',
+                                fontSize: '16px',
+                                fontWeight: '500',
+                                backgroundColor: '#1a73e8',
+                                '&:hover': {
+                                    backgroundColor: '#1b66c9',
+                                },
+                                width: '100%',
+                                color: '#fff'
+                            }}
+                        >
+                            Create Account
+                        </CustomButton>
+                    </Link>
                 </Box>
 
                 {/* Divider with text */}
