@@ -1,10 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
     Box,
     Typography,
-    TextField,
-    Button,
     FormControl,
     InputLabel,
     OutlinedInput,
@@ -16,10 +13,15 @@ import {
     MenuItem,
     Tabs,
     Tab,
-    Paper
+    Link,
+    Paper,
+    Input,
+    FormHelperText as MuiFormHelperText,
 } from '@mui/material';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { AddAPhotoOutlined, Visibility, VisibilityOff, Business, People } from '@mui/icons-material';
 import CustomButton from '../components/UI/CustomButton';
+import CustomTextField from '../components/UI/CustomTextField';
 import bgImage from '../assets/bg-login-img.png';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -251,12 +253,12 @@ const BusinessRegistration = () => {
                 </Box>
                 {!imagePreview && (
                     <Typography variant="caption" color="textSecondary" sx={{ mt: 1, fontSize: '0.75rem' }}>
-                        Click to upload your business logo
-                    </Typography>
-                )}
-            </Box>
+                    Click to upload your business logo
+                </Typography>
+            )}
+        </Box>
 
-            <TextField
+            <CustomTextField
                 fullWidth
                 label="Business Name"
                 name="businessName"
@@ -266,22 +268,12 @@ const BusinessRegistration = () => {
                 helperText={errors.businessName}
                 variant="outlined"
                 margin="normal"
+                placeholder="Enter your business name"
             />
-            {/* <TextField
+
+            <CustomTextField
                 fullWidth
-                label="Business Email"
-                name="businessEmail"
-                type="email"
-                value={formData.businessEmail}
-                onChange={handleChange}
-                error={!!errors.businessEmail}
-                helperText={errors.businessEmail}
-                variant="outlined"
-                margin="normal"
-            /> */}
-            <TextField
-                fullWidth
-                label="Address"
+                label="Business Address"
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
@@ -290,72 +282,91 @@ const BusinessRegistration = () => {
                 variant="outlined"
                 margin="normal"
                 multiline
-            // rows={2}
+                // rows={2}
+                placeholder="Enter full business address"
             />
 
-            <TextField
-                fullWidth
-                label="Contact Person title"
-                name="contactPersonTitle"
-                type="text"
-                value={formData.contactPersonTitle}
-                onChange={handleChange}
-                // error={!!errors.phoneNumber}
-                // helperText={errors.phoneNumber}
-                variant="outlined"
-                margin="normal"
-            />
-
-            <TextField
-                fullWidth
-                label="Contact/Phone Number"
-                name="phoneNumber"
-                type="tel"
-                value={formData.phoneNumber}
-                onChange={handleChange}
-                error={!!errors.phoneNumber}
-                helperText={errors.phoneNumber}
-                variant="outlined"
-                margin="normal"
-            />
-
-            <FormControl fullWidth margin="normal" error={!!errors.businessType}>
-                <InputLabel id="business-type-label">Business Type</InputLabel>
-                <Select
-                    labelId="business-type-label"
-                    id="businessType"
-                    name="businessType"
-                    value={formData.businessType}
+            <Box sx={{ gap: 2, width: '100%' }}>
+                <CustomTextField
+                    fullWidth
+                    label="Contact Person Title"
+                    name="contactPersonTitle"
+                    value={formData.contactPersonTitle}
                     onChange={handleChange}
+                    variant="outlined"
+                    margin="normal"
+                    // placeholder="e.g., Owner, Manager"
+                />
+                {/* <CustomTextField
+                    fullWidth
+                    label="Phone Number"
+                    name="phoneNumber"
+                    type="tel"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    error={!!errors.phoneNumber}
+                    helperText={errors.phoneNumber}
+                    variant="outlined"
+                    margin="normal"
+                    placeholder="+1 (___) ___-____"
+                /> */}
+            </Box>
+
+            <Box sx={{ gap: 2, width: '100%' }}>
+                <CustomTextField
+                    fullWidth
                     label="Business Type"
-                >
-                    {businessTypes.map((type) => (
-                        <MenuItem key={type} value={type}>
-                            {type}
-                        </MenuItem>
-                    ))}
-                </Select>
-                {errors.businessType && <FormHelperText>{errors.businessType}</FormHelperText>}
-            </FormControl>
+                    name="contactPersonTitle"
+                    value={formData.contactPersonTitle}
+                    onChange={handleChange}
+                    variant="outlined"
+                    margin="normal"
+                    // placeholder="e.g., Owner, Manager"
+                />
+                {/* <CustomTextField
+                    fullWidth
+                    label="Phone Number"
+                    name="phoneNumber"
+                    type="tel"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    error={!!errors.phoneNumber}
+                    helperText={errors.phoneNumber}
+                    variant="outlined"
+                    margin="normal"
+                    placeholder="+1 (___) ___-____"
+                /> */}
+            </Box>
+
 
             {/* Business Documents Section */}
-            <Box sx={{ width: '100%', mt: 2 }}>
-                {/* <Typography variant="subtitle1" sx={{ fontWeight: 500, color: 'text.primary' }}>
+            <Box sx={{ width: '100%' }}>
+                <Typography variant="subtitle1" sx={{ 
+                    fontWeight: 500, 
+                    color: 'text.primary',
+                    mb: 1
+                }}>
                     Site Photo
-                </Typography> */}
+                </Typography>
                 <Box
                     sx={{
                         border: '2px dashed #e0e0e0',
-                        borderRadius: 1,
-                        p: 3,
+                        borderRadius: 2,
+                        p: 4,
                         textAlign: 'center',
                         backgroundColor: '#fafafa',
                         cursor: 'pointer',
                         '&:hover': {
                             backgroundColor: '#f5f5f5',
                             borderColor: '#1976d2',
+                            '& .upload-icon': {
+                                color: '#1976d2',
+                            },
+                            '& .upload-text': {
+                                color: '#1976d2',
+                            }
                         },
-                        transition: 'all 0.3s',
+                        transition: 'all 0.3s ease-in-out',
                     }}
                     onClick={() => document.getElementById('document-upload').click()}
                 >
@@ -365,51 +376,191 @@ const BusinessRegistration = () => {
                         accept=".pdf,.jpg,.jpeg,.png"
                         style={{ display: 'none' }}
                         onChange={handleDocumentUpload}
+                        multiple
                     />
-                    <CloudUploadIcon color="action" sx={{ fontSize: 48 }} />
-                    <Typography variant="body1" sx={{}}>
+                    <CloudUploadIcon 
+                        className="upload-icon"
+                        sx={{ 
+                            fontSize: 48, 
+                            color: 'text.secondary',
+                            mb: 1,
+                            transition: 'color 0.3s ease-in-out',
+                        }} 
+                    />
+                    <Typography 
+                        variant="body1" 
+                        className="upload-text"
+                        sx={{
+                            fontWeight: 500,
+                            color: 'text.primary',
+                            mb: 0.5,
+                            transition: 'color 0.3s ease-in-out',
+                        }}
+                    >
                         Drag and drop files here or click to browse
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                        Supported formats: PDF, JPG, PNG (Max size: 5MB)
+                    <Typography 
+                        variant="caption" 
+                        color="text.secondary"
+                        sx={{
+                            fontSize: '0.75rem',
+                            display: 'block',
+                        }}
+                    >
+                        Supported formats: PDF, JPG, PNG (Max 5MB per file)
                     </Typography>
                 </Box>
 
+                <Box sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    width: '100%', 
+                    mt: 1,
+                    mb: 1
+                }}>
+                    <Link
+                        component={RouterLink}
+                        to="/business-employees"
+                        sx={{
+                            width: '100%',
+                            maxWidth: '500px',
+                            textDecoration: 'none',
+                            '&:hover': {
+                                textDecoration: 'none'
+                            }
+                        }}
+                    >
+                        <CustomButton
+                            type="button"
+                            variant="contained"
+                            fullWidth
+                            sx={{
+                                py: 1.5,
+                                borderRadius: '8px',
+                                textTransform: 'none',
+                                fontSize: '16px',
+                                fontWeight: '600',
+                                backgroundColor: '#1976d2',
+                                '&:hover': {
+                                    backgroundColor: '#1565c0',
+                                    boxShadow: '0 4px 12px rgba(25, 118, 210, 0.2)',
+                                },
+                                boxShadow: '0 2px 4px rgba(25, 118, 210, 0.15)',
+                                transition: 'all 0.3s ease-in-out',
+                                letterSpacing: '0.5px',
+                                width: '100%',
+                                color: '#fff',
+                            }}
+                        >
+                            Next
+                        </CustomButton>
+                    </Link>
+                </Box>
                 {/* Display uploaded files */}
                 {uploadedDocuments.length > 0 && (
-                    <Box sx={{}}>
-                        <Typography variant="subtitle2" sx={{}}>
-                            Uploaded Documents:
+                    <Box sx={{ mt: 2 }}>
+                        <Typography 
+                            variant="subtitle2" 
+                            sx={{ 
+                                fontWeight: 500,
+                                color: 'text.primary',
+                                mb: 1,
+                                display: 'block'
+                            }}
+                        >
+                            Uploaded Documents ({uploadedDocuments.length})
                         </Typography>
-                        {uploadedDocuments.map((doc, index) => (
-                            <Box
-                                key={index}
-                                sx={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'space-between',
-                                    // p: 1.5,
-                                    border: '1px solid #e0e0e0',
-                                    borderRadius: 1,
-                                    // mb: 1,   
-                                    backgroundColor: 'white',
-                                }}
-                            >
-                                <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                    <DescriptionIcon color="action" sx={{ mr: 1.5 }} />
-                                    <Typography variant="body2" sx={{ color: 'text.primary' }}>
-                                        {doc.name}
-                                    </Typography>
-                                </Box>
-                                <IconButton
-                                    size="small"
-                                    onClick={() => handleRemoveDocument(index)}
-                                    color="error"
+                        <Box sx={{ 
+                            maxHeight: '200px',
+                            overflowY: 'auto',
+                            border: '1px solid #e0e0e0',
+                            borderRadius: 1,
+                            backgroundColor: 'white',
+                            '&::-webkit-scrollbar': {
+                                width: '6px',
+                            },
+                            '&::-webkit-scrollbar-track': {
+                                background: '#f1f1f1',
+                                borderRadius: '10px',
+                            },
+                            '&::-webkit-scrollbar-thumb': {
+                                background: '#888',
+                                borderRadius: '10px',
+                                '&:hover': {
+                                    background: '#666',
+                                }
+                            }
+                        }}>
+                            {uploadedDocuments.map((doc, index) => (
+                                <Box
+                                    key={index}
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
+                                        p: 1.5,
+                                        borderBottom: '1px solid #f0f0f0',
+                                        '&:last-child': {
+                                            borderBottom: 'none',
+                                        },
+                                        '&:hover': {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.02)',
+                                        },
+                                        transition: 'background-color 0.2s ease-in-out',
+                                    }}
                                 >
-                                    <DeleteIcon fontSize="small" />
-                                </IconButton>
-                            </Box>
-                        ))}
+                                    <Box sx={{ display: 'flex', alignItems: 'center', width: 'calc(100% - 40px)' }}>
+                                        <DescriptionIcon 
+                                            color="action" 
+                                            sx={{ 
+                                                mr: 1.5,
+                                                color: '#757575',
+                                            }} 
+                                        />
+                                        <Typography 
+                                            variant="body2" 
+                                            sx={{ 
+                                                color: 'text.primary',
+                                                whiteSpace: 'nowrap',
+                                                overflow: 'hidden',
+                                                textOverflow: 'ellipsis',
+                                                maxWidth: '85%',
+                                            }}
+                                        >
+                                            {doc.name}
+                                        </Typography>
+                                        <Typography 
+                                            variant="caption" 
+                                            sx={{ 
+                                                color: 'text.secondary',
+                                                ml: 'auto',
+                                                fontSize: '0.7rem',
+                                                whiteSpace: 'nowrap',
+                                            }}
+                                        >
+                                            {(doc.size / 1024).toFixed(1)} KB
+                                        </Typography>
+                                    </Box>
+                                    <IconButton
+                                        size="small"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleRemoveDocument(index);
+                                        }}
+                                        color="error"
+                                        sx={{
+                                            '&:hover': {
+                                                backgroundColor: 'rgba(244, 67, 54, 0.08)',
+                                            },
+                                            padding: '8px',
+                                            marginLeft: '8px',
+                                        }}
+                                    >
+                                        <DeleteIcon fontSize="small" />
+                                    </IconButton>
+                                </Box>
+                            ))}
+                        </Box>
                     </Box>
                 )}
             </Box>
@@ -532,11 +683,7 @@ const BusinessRegistration = () => {
                             label="Business Employees"
                             iconPosition="start"
                             sx={{ textTransform: 'none', fontWeight: 500 }}
-                            component="a"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                navigate('/business-employees');
-                            }}
+                            onClick={() => navigate('/business-employees')}
                         />
                     </Tabs>
                 </Paper>
