@@ -139,15 +139,9 @@ const VerificationCode = () => {
           position: 'relative',
           margin: 0,
           height: '60vh',
-        //   overflowY: 'auto',
-        //   borderRadius: 0,
           margin: { xs: 0, md: 1 },
-        //   mr: { md: '5%' },
-        //   maxHeight: '100vh',
           overflowY: 'auto',
           margin: { xs: 2, md: 15 },
-        //   mr: { md: '10%' },
-        //   maxHeight: '100vh',
           overflowY: 'auto'
         }}
       >
@@ -234,7 +228,6 @@ const VerificationCode = () => {
             '&:hover': {
               backgroundColor: '#1b66c9',
             },
-            
           }}
         >
           {/* {isLoading ? 'Verifying...' : 'Verify'} */}

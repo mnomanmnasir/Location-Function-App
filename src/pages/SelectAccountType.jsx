@@ -80,8 +80,14 @@ const SelectAccountType = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (selectedType) {
-      console.log('Login form submitted:', { email, password, accountType: selectedType });
-      // Handle login logic here
+      // Get the selected account type title
+      const selectedAccount = accountTypes.find(type => type.id === selectedType);
+      // Navigate to complete profile page with the selected account type
+      navigate('/complete-profile', { 
+        state: { 
+          accountType: selectedAccount.title 
+        } 
+      });
     }
   };
 
@@ -138,7 +144,7 @@ const SelectAccountType = () => {
       {/* Account Type Selection Form */}
       <Box
         component="form"
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         sx={{
           width: '100%',
           maxWidth: '450px',
@@ -166,9 +172,9 @@ const SelectAccountType = () => {
             sx={{
               color: '#000',
               fontSize: '24px',
-              // fontWeight: 400,
+              fontWeight: 400,
               fontFamily: 'Google Sans, Roboto, Arial, sans-serif',
-              fontWeight: 'bold',
+              // fontWeight: 'bold',
               mb: 1
             }}
           >
@@ -292,11 +298,11 @@ const SelectAccountType = () => {
         {/* Continue Button */}
         <Box sx={{ width: '100%', mt: 2 }}>
           <CustomButton
-            type="button"
+            type="submit"
             variant="contained"
             fullWidth
-            // onClick={handleContinue}
-            // disabled={!selectedType}
+            onClick={handleSubmit}
+            disabled={!selectedType}
             sx={{
               py: 1.5,
               fontSize: '0.875rem',
