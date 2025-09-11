@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
     Box,
@@ -12,9 +12,11 @@ import {
     OutlinedInput,
     FormHelperText,
     Select,
-    MenuItem
+    MenuItem,
+    Avatar,
+    Stack
 } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Visibility, VisibilityOff, AddAPhotoOutlined } from '@mui/icons-material';
 import CustomButton from '../components/UI/CustomButton';
 import bgImage from '../assets/bg-login-img.png';
 
@@ -22,9 +24,12 @@ import bgImage from '../assets/bg-login-img.png';
 const CompleteProfile = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const fileInputRef = useRef(null);
     const [showPassword, setShowPassword] = React.useState(false);
     // Get the selected account type from the location state
     const accountType = location.state?.accountType || '';
+    const [profileImage, setProfileImage] = React.useState(null);
+    const [imagePreview, setImagePreview] = React.useState('');
 
 
     const accountTypeOptions = [
@@ -61,6 +66,31 @@ const CompleteProfile = () => {
         }
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setProfileImage(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleImageClick = () => {
+        fileInputRef.current.click();
+    };
+
+    const handleRemoveImage = (e) => {
+        e.stopPropagation();
+        setProfileImage(null);
+        setImagePreview('');
+        if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+        }
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         // Add form validation here
@@ -71,14 +101,23 @@ const CompleteProfile = () => {
         if (!formData.expertise) newErrors.expertise = 'Please select your expertise';
         if (!formData.accountType) newErrors.accountType = 'Please select account type';
 
-
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
 
+        // Create form data for file upload
+        const submitData = new FormData();
+        submitData.append('username', formData.username);
+        submitData.append('title', formData.title);
+        submitData.append('expertise', formData.expertise);
+        submitData.append('accountType', formData.accountType);
+        if (profileImage) {
+            submitData.append('profileImage', profileImage);
+        }
+
         // Handle form submission (e.g., API call)
-        console.log('Form submitted:', { ...formData, accountType });
+        console.log('Form submitted:', { ...formData, accountType, hasProfileImage: !!profileImage });
 
         // Redirect to dashboard or next step
         // navigate('/dashboard');
@@ -161,7 +200,89 @@ const CompleteProfile = () => {
                     Complete Your Profile
                 </Typography>
 
-                {/* <Box sx={{ gap: 2 }}> */}
+                <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <Box
+                        sx={{
+                            position: 'relative',
+                            cursor: 'pointer',
+                            '&:hover .MuiAvatar-root': {
+                                opacity: 0.8,
+                            },
+                            '&:hover .camera-icon': {
+                                opacity: 1,
+                            },
+                            '&:hover .remove-icon': {
+                                opacity: 1,
+                            }
+                        }}
+                        onClick={handleImageClick}
+                    >
+                        <input
+                            type="file"
+                            ref={fileInputRef}
+                            onChange={handleImageChange}
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                        />
+                        <Avatar
+                            src={imagePreview}
+                            sx={{
+                                width: 120,
+                                height: 120,
+                                border: '2px solid #E0E0E0',
+                                transition: 'opacity 0.3s',
+                            }}
+                        >
+                            {!imagePreview && <AddAPhotoOutlined sx={{ fontSize: 40, color: '#9E9E9E' }} />}
+                        </Avatar>
+                        <Box
+                            className="camera-icon"
+                            sx={{
+                                position: 'absolute',
+                                bottom: 8,
+                                right: 8,
+                                backgroundColor: '#1976d2',
+                                borderRadius: '50%',
+                                width: 32,
+                                height: 32,
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                opacity: imagePreview ? 1 : 0.7,
+                                transition: 'opacity 0.3s',
+                            }}
+                        >
+                            <AddAPhotoOutlined sx={{ color: 'white', fontSize: 18 }} />
+                        </Box>
+                        {imagePreview && (
+                            <Box
+                                className="remove-icon"
+                                onClick={handleRemoveImage}
+                                sx={{
+                                    position: 'absolute',
+                                    top: 8,
+                                    right: 8,
+                                    backgroundColor: '#f44336',
+                                    borderRadius: '50%',
+                                    width: 24,
+                                    height: 24,
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    opacity: 0,
+                                    transition: 'opacity 0.3s',
+                                    cursor: 'pointer',
+                                    '&:hover': {
+                                        backgroundColor: '#d32f2f',
+                                    }
+                                }}
+                            >
+                                <Typography variant="caption" sx={{ color: 'white', lineHeight: 1 }}>×</Typography>
+                            </Box>
+                        )}
+                    </Box>
+                </Box>
+
                 <TextField
                     fullWidth
                     label="Username (Optional)"
@@ -186,20 +307,18 @@ const CompleteProfile = () => {
                     margin="normal"
                 />
 
-                <TextField
-                    fullWidth
-                    label="Expertise"
-                    name="Expertise"
-                    value={formData.expertise}
-                    onChange={handleChange}
-                    error={!!errors.expertise}
-                    helperText={errors.expertise}
-                    variant="outlined"
-                    margin="normal"
-                />
-
                 <Box sx={{ mt: 2 }}>
+                    <TextField
+                        fullWidth
+                        value={formData.expertise}
+                        // disabled={!!accountType}
+                        label="Expertise"
+                        name="expertise"
+                        onChange={handleChange}
+                    />
+                </Box>
 
+                <Box sx={{ mt: 3 }}>
                     <TextField
                         fullWidth
                         value={formData.accountType}
@@ -208,7 +327,7 @@ const CompleteProfile = () => {
                         name="accountType"
                         onChange={handleChange}
                         input={<OutlinedInput label="Account Type" />}
-                        displayEmpty
+                    // displayEmpty
                     />
                 </Box>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

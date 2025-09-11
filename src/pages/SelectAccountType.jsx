@@ -83,10 +83,10 @@ const SelectAccountType = () => {
       // Get the selected account type title
       const selectedAccount = accountTypes.find(type => type.id === selectedType);
       // Navigate to complete profile page with the selected account type
-      navigate('/complete-profile', { 
-        state: { 
-          accountType: selectedAccount.title 
-        } 
+      navigate('/complete-profile', {
+        state: {
+          accountType: selectedAccount.title || ''
+        }
       });
     }
   };

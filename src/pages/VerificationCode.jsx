@@ -22,7 +22,7 @@ const VerificationCode = () => {
   const location = useLocation();
   const inputRefs = useRef([]);
   const { email } = location.state || {};
-  
+
   useEffect(() => {
     // Auto focus first input
     inputRefs.current[0]?.focus();
@@ -40,7 +40,7 @@ const VerificationCode = () => {
       const newCode = [...code];
       newCode[index] = value;
       setCode(newCode);
-      
+
       // Move to next input if there's a value
       if (value !== '' && index < 3) {
         inputRefs.current[index + 1]?.focus();
@@ -53,7 +53,7 @@ const VerificationCode = () => {
       inputRefs.current[index - 1]?.focus();
     }
   };
-  
+
   const handleResendCode = () => {
     // Reset countdown and resend code logic here
     setCountdown(30);
@@ -67,15 +67,15 @@ const VerificationCode = () => {
     // Here you would typically verify the code with your backend
     const verificationCode = code.join('');
     console.log('Verification code:', verificationCode);
-    
+
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       // On successful verification, redirect to login or dashboard
-      navigate('/login', { 
-        state: { 
-          message: 'Verification successful! Please login with your credentials.' 
-        } 
+      navigate('/login', {
+        state: {
+          message: 'Verification successful! Please login with your credentials.'
+        }
       });
     }, 1000);
   };
@@ -158,13 +158,11 @@ const VerificationCode = () => {
           >
             Enter Verification Code
           </Typography>
-       
-          
         </Box>
 
-        <Box sx={{ 
-          display: 'flex', 
-          justifyContent: 'center', 
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
           gap: '16px',
           mb: 3,
           '& .MuiOutlinedInput-root': {
@@ -217,7 +215,7 @@ const VerificationCode = () => {
           type="submit"
           variant="contained"
           fullWidth
-        //   disabled={!isCodeComplete || isLoading}
+          //   disabled={!isCodeComplete || isLoading}
           sx={{
             py: 1.5,
             borderRadius: '8px',

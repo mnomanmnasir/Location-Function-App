@@ -213,7 +213,7 @@ const Login = () => {
 
         {/* Divider with text */}
         <Box sx={{ textAlign: 'center', mb: 1 }}>
-       
+
           <Typography variant="body2" color="#000">
             Don't have an account? <Link component={RouterLink} to="/signup" sx={{ color: '#1a73e8' }}>Sign up</Link>
           </Typography>
@@ -228,7 +228,7 @@ const Login = () => {
                 top: '50%',
                 transform: 'translate(-50%, -50%)',
                 px: 2,
-              backgroundColor: 'white',
+                backgroundColor: 'white',
                 color: '#5f6368',
                 fontSize: '14px',
                 fontFamily: 'Roboto, Arial, sans-serif'

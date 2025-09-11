@@ -209,10 +209,10 @@ const SignUp = () => {
 
                 {/* Sign Up Button */}
                 <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-                    <Link 
+                    <Link
                         component={RouterLink}
                         to="/verification-code"
-                        sx={{ 
+                        sx={{
                             width: '100%',
                             maxWidth: '500px',
                             textDecoration: 'none',
