@@ -158,7 +158,7 @@ const BusinessRegistration = () => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 width: '100%',
-                // mb: 4
+                mb: 2
             }}>
                 <Box
                     sx={{
@@ -195,7 +195,7 @@ const BusinessRegistration = () => {
                     >
                         {!imagePreview && (
                             <Box sx={{ textAlign: 'center' }}>
-                                <AddAPhotoOutlined sx={{ fontSize: 30, color: '#9E9E9E', mb: 1 }} />
+                                <AddAPhotoOutlined sx={{ fontSize: 30, color: '#9E9E9E' }} />
                                 <Typography variant="caption" display="block" color="text.secondary">
                                     Add Logo
                                 </Typography>
@@ -253,40 +253,39 @@ const BusinessRegistration = () => {
                 </Box>
                 {!imagePreview && (
                     <Typography variant="caption" color="textSecondary" sx={{ mt: 1, fontSize: '0.75rem' }}>
-                    Click to upload your business logo
-                </Typography>
-            )}
-        </Box>
+                        Click to upload your business logo
+                    </Typography>
+                )}
+            </Box>
 
-            <CustomTextField
-                fullWidth
-                label="Business Name"
-                name="businessName"
-                value={formData.businessName}
-                onChange={handleChange}
-                error={!!errors.businessName}
-                helperText={errors.businessName}
-                variant="outlined"
-                margin="normal"
-                placeholder="Enter your business name"
-            />
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <CustomTextField
+                    fullWidth
+                    label="Business Name"
+                    name="businessName"
+                    value={formData.businessName}
+                    onChange={handleChange}
+                    error={!!errors.businessName}
+                    helperText={errors.businessName}
+                    variant="outlined"
+                    margin="none"
+                    placeholder="Enter your business name"
+                />
 
-            <CustomTextField
-                fullWidth
-                label="Business Address"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                error={!!errors.address}
-                helperText={errors.address}
-                variant="outlined"
-                margin="normal"
-                multiline
-                // rows={2}
-                placeholder="Enter full business address"
-            />
+                <CustomTextField
+                    fullWidth
+                    label="Business Address"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    error={!!errors.address}
+                    helperText={errors.address}
+                    variant="outlined"
+                    margin="none"
+                    multiline
+                    placeholder="Enter full business address"
+                />
 
-            <Box sx={{ gap: 2, width: '100%' }}>
                 <CustomTextField
                     fullWidth
                     label="Contact Person Title"
@@ -294,25 +293,10 @@ const BusinessRegistration = () => {
                     value={formData.contactPersonTitle}
                     onChange={handleChange}
                     variant="outlined"
-                    margin="normal"
-                    // placeholder="e.g., Owner, Manager"
+                    margin="none"
+                    placeholder="e.g., Owner, Manager"
                 />
-                {/* <CustomTextField
-                    fullWidth
-                    label="Phone Number"
-                    name="phoneNumber"
-                    type="tel"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    error={!!errors.phoneNumber}
-                    helperText={errors.phoneNumber}
-                    variant="outlined"
-                    margin="normal"
-                    placeholder="+1 (___) ___-____"
-                /> */}
-            </Box>
 
-            <Box sx={{ gap: 2, width: '100%' }}>
                 <CustomTextField
                     fullWidth
                     label="Business Type"
@@ -320,10 +304,11 @@ const BusinessRegistration = () => {
                     value={formData.contactPersonTitle}
                     onChange={handleChange}
                     variant="outlined"
-                    margin="normal"
-                    // placeholder="e.g., Owner, Manager"
+                    margin="none"
+                    placeholder="Select business type"
                 />
-                {/* <CustomTextField
+            </Box>
+            {/* <CustomTextField
                     fullWidth
                     label="Phone Number"
                     name="phoneNumber"
@@ -336,13 +321,12 @@ const BusinessRegistration = () => {
                     margin="normal"
                     placeholder="+1 (___) ___-____"
                 /> */}
-            </Box>
 
 
             {/* Business Documents Section */}
             <Box sx={{ width: '100%' }}>
-                <Typography variant="subtitle1" sx={{ 
-                    fontWeight: 500, 
+                <Typography variant="subtitle1" sx={{
+                    fontWeight: 500,
                     color: 'text.primary',
                     mb: 1
                 }}>
@@ -378,17 +362,17 @@ const BusinessRegistration = () => {
                         onChange={handleDocumentUpload}
                         multiple
                     />
-                    <CloudUploadIcon 
+                    <CloudUploadIcon
                         className="upload-icon"
-                        sx={{ 
-                            fontSize: 48, 
+                        sx={{
+                            fontSize: 48,
                             color: 'text.secondary',
                             mb: 1,
                             transition: 'color 0.3s ease-in-out',
-                        }} 
+                        }}
                     />
-                    <Typography 
-                        variant="body1" 
+                    <Typography
+                        variant="body1"
                         className="upload-text"
                         sx={{
                             fontWeight: 500,
@@ -399,8 +383,8 @@ const BusinessRegistration = () => {
                     >
                         Drag and drop files here or click to browse
                     </Typography>
-                    <Typography 
-                        variant="caption" 
+                    <Typography
+                        variant="caption"
                         color="text.secondary"
                         sx={{
                             fontSize: '0.75rem',
@@ -411,10 +395,10 @@ const BusinessRegistration = () => {
                     </Typography>
                 </Box>
 
-                <Box sx={{ 
-                    display: 'flex', 
-                    justifyContent: 'center', 
-                    width: '100%', 
+                <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    width: '100%',
                     mt: 1,
                     mb: 1
                 }}>
@@ -459,9 +443,9 @@ const BusinessRegistration = () => {
                 {/* Display uploaded files */}
                 {uploadedDocuments.length > 0 && (
                     <Box sx={{ mt: 2 }}>
-                        <Typography 
-                            variant="subtitle2" 
-                            sx={{ 
+                        <Typography
+                            variant="subtitle2"
+                            sx={{
                                 fontWeight: 500,
                                 color: 'text.primary',
                                 mb: 1,
@@ -470,7 +454,7 @@ const BusinessRegistration = () => {
                         >
                             Uploaded Documents ({uploadedDocuments.length})
                         </Typography>
-                        <Box sx={{ 
+                        <Box sx={{
                             maxHeight: '200px',
                             overflowY: 'auto',
                             border: '1px solid #e0e0e0',
@@ -510,16 +494,16 @@ const BusinessRegistration = () => {
                                     }}
                                 >
                                     <Box sx={{ display: 'flex', alignItems: 'center', width: 'calc(100% - 40px)' }}>
-                                        <DescriptionIcon 
-                                            color="action" 
-                                            sx={{ 
+                                        <DescriptionIcon
+                                            color="action"
+                                            sx={{
                                                 mr: 1.5,
                                                 color: '#757575',
-                                            }} 
+                                            }}
                                         />
-                                        <Typography 
-                                            variant="body2" 
-                                            sx={{ 
+                                        <Typography
+                                            variant="body2"
+                                            sx={{
                                                 color: 'text.primary',
                                                 whiteSpace: 'nowrap',
                                                 overflow: 'hidden',
@@ -529,9 +513,9 @@ const BusinessRegistration = () => {
                                         >
                                             {doc.name}
                                         </Typography>
-                                        <Typography 
-                                            variant="caption" 
-                                            sx={{ 
+                                        <Typography
+                                            variant="caption"
+                                            sx={{
                                                 color: 'text.secondary',
                                                 ml: 'auto',
                                                 fontSize: '0.7rem',

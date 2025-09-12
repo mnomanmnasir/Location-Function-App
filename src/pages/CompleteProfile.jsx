@@ -19,6 +19,7 @@ import {
 import { Visibility, VisibilityOff, AddAPhotoOutlined } from '@mui/icons-material';
 import CustomButton from '../components/UI/CustomButton';
 import bgImage from '../assets/bg-login-img.png';
+import CustomTextField from '../components/UI/CustomTextField';
 
 
 const CompleteProfile = () => {
@@ -283,32 +284,34 @@ const CompleteProfile = () => {
                     </Box>
                 </Box>
 
-                <TextField
-                    fullWidth
-                    label="Username (Optional)"
-                    name="username"
-                    value={formData.username}
-                    onChange={handleChange}
-                    error={!!errors.username}
-                    helperText={errors.username}
-                    variant="outlined"
-                    margin="normal"
-                />
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <CustomTextField
+                        fullWidth
+                        label="Username (Optional)"
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        error={!!errors.username}
+                        helperText={errors.username}
+                        variant="outlined"
+                        margin="none"
+                    />
 
-                <TextField
-                    fullWidth
-                    label="Title"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                    error={!!errors.title}
-                    helperText={errors.title}
-                    variant="outlined"
-                    margin="normal"
-                />
+                    <CustomTextField
+                        fullWidth
+                        label="Title"
+                        name="title"
+                        value={formData.title}
+                        onChange={handleChange}
+                        error={!!errors.title}
+                        helperText={errors.title}
+                        variant="outlined"
+                        margin="none"
+                    />
+                </Box>
 
-                <Box sx={{ mt: 2 }}>
-                    <TextField
+                {/* <Box> */}
+                    <CustomTextField
                         fullWidth
                         value={formData.expertise}
                         // disabled={!!accountType}
@@ -316,10 +319,10 @@ const CompleteProfile = () => {
                         name="expertise"
                         onChange={handleChange}
                     />
-                </Box>
+                {/* </Box> */}
 
-                <Box sx={{ mt: 3 }}>
-                    <TextField
+                {/* <Box sx={{ mt: 3 }}> */}
+                    <CustomTextField
                         fullWidth
                         value={formData.accountType}
                         disabled={!!accountType}
@@ -329,14 +332,14 @@ const CompleteProfile = () => {
                         input={<OutlinedInput label="Account Type" />}
                     // displayEmpty
                     />
-                </Box>
+                {/* </Box> */}
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <CustomButton
                         type="submit"
                         variant="contained"
                         fullWidth
                         sx={{
-                            py: 1.5,
+                            // py: 1.5,
                             fontSize: '1rem',
                             fontWeight: 500,
                             textTransform: 'none',
