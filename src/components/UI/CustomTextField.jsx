@@ -8,17 +8,41 @@ const CustomTextField = ({
   value,
   onChange,
   showPassword = false,
+  showConfirmPassword = false,
   onTogglePasswordVisibility,
+  onToggleConfirmPasswordVisibility,
   fullWidth = true,
   required = false,
   placeholder = '',
   ...props
 }) => {
+  const isPasswordField = type === 'password' || type === 'confirmPassword';
+  const showText = type === 'password' ? showPassword : showConfirmPassword;
+  
+  // Create input props object
+  const inputProps = {
+    ...props.InputProps,
+    endAdornment: isPasswordField ? (
+      <InputAdornment position="end">
+        <IconButton
+          aria-label="toggle password visibility"
+          onClick={type === 'password' ? onTogglePasswordVisibility : onToggleConfirmPasswordVisibility}
+          edge="end"
+          size="small"
+          sx={{ color: '#5f6368' }}
+        >
+          {showText ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ) : null
+  };
+  
   return (
     <Box sx={{ mb: 2 }}>
       <TextField
+        {...props}
         label={label}
-        type={type === 'password' && showPassword ? 'text' : type}
+        type={isPasswordField && !showText ? 'password' : 'text'}
         value={value}
         onChange={onChange}
         fullWidth={fullWidth}
@@ -26,6 +50,7 @@ const CustomTextField = ({
         placeholder={placeholder}
         variant="outlined"
         size="small"
+        InputProps={inputProps}
         sx={{
           '& .MuiOutlinedInput-root': {
             height: '40px',

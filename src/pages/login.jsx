@@ -177,7 +177,8 @@ const Login = () => {
           // sx={{ m: 0 }}
           />
           <Link
-            href="#"
+            component={RouterLink}
+            to="/reset-verify-code"
             sx={{
               color: '#1a73e8',
               textDecoration: 'none',

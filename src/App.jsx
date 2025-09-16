@@ -6,6 +6,8 @@ import SelectAccountType from './pages/SelectAccountType';
 import CompleteProfile from './pages/CompleteProfile';
 import BusinessRegistration from './pages/BusinessRegistration';
 import BusinessEmployees from './pages/BusinessEmployees';
+import ResetPassword from './pages/resetPassword';
+import ResetVerifyCode from './pages/resetVerifyCode';
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/complete-profile" element={<CompleteProfile />} />
         <Route path="/business-registration" element={<BusinessRegistration />} />
         <Route path="/business-employees" element={<BusinessEmployees />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/reset-verify-code" element={<ResetVerifyCode />} />
         {/* Add other routes as needed */}
       </Routes>
     </Router>

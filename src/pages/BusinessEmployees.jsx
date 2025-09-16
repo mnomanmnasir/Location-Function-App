@@ -19,9 +19,10 @@ import {
     Paper,
     Grid
 } from '@mui/material';
-import { Business, People } from '@mui/icons-material';
+import { Business, People, Add, Close } from '@mui/icons-material';
 import bgImage from '../assets/bg-login-img.png';
 import CustomTextField from '../components/UI/CustomTextField';
+import CustomButton from '../components/UI/CustomButton';
 
 
 const BusinessEmployees = () => {
@@ -41,7 +42,12 @@ const BusinessEmployees = () => {
         setActiveTab(path.includes('business-employees') ? 1 : 0);
     }, [window.location.pathname]);
 
+    const [showEmployeeForm, setShowEmployeeForm] = useState(false);
+    const [employees, setEmployees] = useState([]);
     const [formData, setFormData] = React.useState({
+        employeeName: '',
+        employeeEmail: '',
+        employeeTitle: '',
         businessName: '',
         businessEmail: '',
         contactPersonTitle: '',
@@ -107,7 +113,7 @@ const BusinessEmployees = () => {
                     }
                 }}
             />
-    
+
 
             {/* Main Form Container */}
             <Box
@@ -186,57 +192,137 @@ const BusinessEmployees = () => {
                 </Paper>
 
                 {/* Employee List/Form Content */}
-                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <CustomTextField
-                    fullWidth
-                    label="Employee Name"
-                    name="businessName"
-                    value={formData.businessName}
-                    onChange={handleChange}
-                    error={!!errors.businessName}
-                    helperText={errors.businessName}
-                    variant="outlined"
-                    margin="none"
-                    placeholder="Enter your business name"
-                />
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, mt: 2 }}>
+                    {!showEmployeeForm ? (
+                        <CustomButton
+                            variant="contained"
+                            startIcon={<Add />}
+                            onClick={() => setShowEmployeeForm(true)}
+                            fullWidth
+                            sx={{ mb: 2 }}
+                        >
+                            Add Employee
+                        </CustomButton>
+                    ) : (
+                        <Box sx={{ border: '1px solid #e0e0e0', p: 3, borderRadius: 2, mb: 3 }}>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                                <Typography variant="h6">Add New Employee</Typography>
+                                <IconButton onClick={() => setShowEmployeeForm(false)} size="small">
+                                    <Close />
+                                </IconButton>
+                            </Box>
+                            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                                <CustomTextField
+                                    fullWidth
+                                    label="Employee Name"
+                                    name="employeeName"
+                                    value={formData.employeeName}
+                                    onChange={handleChange}
+                                    variant="outlined"
+                                    margin="none"
+                                    placeholder="Enter employee name"
+                                />
 
+                                <CustomTextField
+                                    fullWidth
+                                    label="Employee Email"
+                                    name="employeeEmail"
+                                    type="email"
+                                    value={formData.employeeEmail}
+                                    onChange={handleChange}
+                                    variant="outlined"
+                                    margin="none"
+                                    placeholder="Enter employee email"
+                                />
 
-                <CustomTextField
-                    fullWidth
-                    label="Employee Email"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    error={!!errors.address}
-                    helperText={errors.address}
-                    variant="outlined"
-                    margin="none"
-                    multiline
-                    placeholder="Enter full business address"
-                />
+                                <CustomTextField
+                                    fullWidth
+                                    label="Employee Title"
+                                    name="employeeTitle"
+                                    value={formData.employeeTitle}
+                                    onChange={handleChange}
+                                    variant="outlined"
+                                    margin="none"
+                                    placeholder="Enter employee title"
+                                />
 
-                <CustomTextField
-                    fullWidth
-                    label="Contact Person Title"
-                    name="contactPersonTitle"
-                    value={formData.contactPersonTitle}
-                    onChange={handleChange}
-                    variant="outlined"
-                    margin="none"
-                    placeholder="e.g., Owner, Manager"
-                />
+                                <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
+                                    <CustomButton
+                                        variant="outlined"
+                                        onClick={() => setShowEmployeeForm(false)}
+                                    >
+                                        Cancel
+                                    </CustomButton>
+                                    <CustomButton
+                                        variant="contained"
+                                        onClick={() => {
+                                            if (formData.employeeName && formData.employeeEmail && formData.employeeTitle) {
+                                                const newEmployee = {
+                                                    name: formData.employeeName,
+                                                    email: formData.employeeEmail,
+                                                    title: formData.employeeTitle
+                                                };
+                                                setEmployees([...employees, newEmployee]);
+                                                setFormData({
+                                                    ...formData,
+                                                    employeeName: '',
+                                                    employeeEmail: '',
+                                                    employeeTitle: ''
+                                                });
+                                                setShowEmployeeForm(false);
+                                            }
+                                        }}
+                                    >
+                                        Add Employee
+                                    </CustomButton>
+                                </Box>
+                            </Box>
+                        </Box>
+                    )}
 
-                <CustomTextField
-                    fullWidth
-                    label="Business Type"
-                    name="contactPersonTitle"
-                    value={formData.contactPersonTitle}
-                    onChange={handleChange}
-                    variant="outlined"
-                    margin="none"
-                    placeholder="Select business type"
-                />
-            </Box>
+                    {/* Display added employees */}
+                    {employees.length > 0 && (
+                        <Box sx={{ mt: 2 }}>
+                            <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 'medium' }}>
+                                Employees ({employees.length})
+                            </Typography>
+                            <Box sx={{ maxHeight: '300px', overflowY: 'auto' }}>
+                                {employees.map((emp, index) => (
+                                    <Paper 
+                                        key={index} 
+                                        sx={{ 
+                                            p: 2, 
+                                            mb: 1, 
+                                            display: 'flex', 
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center'
+                                        }}
+                                    >
+                                        <Box>
+                                            <Typography variant="subtitle2">{emp.name}</Typography>
+                                            <Typography variant="body2" color="text.secondary">
+                                                {emp.title}
+                                            </Typography>
+                                            <Typography variant="body2" color="primary">
+                                                {emp.email}
+                                            </Typography>
+                                        </Box>
+                                        <IconButton 
+                                            size="small" 
+                                            onClick={() => {
+                                                const updatedEmployees = [...employees];
+                                                updatedEmployees.splice(index, 1);
+                                                setEmployees(updatedEmployees);
+                                            }}
+                                        >
+                                            <Close fontSize="small" />
+                                        </IconButton>
+                                    </Paper>
+                                ))}
+                            </Box>
+                        </Box>
+                    )}
+                </Box>
             </Box>
         </Box>
     );
