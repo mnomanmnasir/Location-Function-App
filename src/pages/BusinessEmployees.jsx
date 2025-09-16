@@ -21,6 +21,8 @@ import {
 } from '@mui/material';
 import { Business, People } from '@mui/icons-material';
 import bgImage from '../assets/bg-login-img.png';
+import CustomTextField from '../components/UI/CustomTextField';
+
 
 const BusinessEmployees = () => {
     const navigate = useNavigate();
@@ -31,12 +33,41 @@ const BusinessEmployees = () => {
         setActiveTab(newValue);
         navigate(newValue === 0 ? '/business-registration' : '/business-employees');
     };
+    const [errors, setErrors] = React.useState({});
 
     // Set active tab based on route
     useEffect(() => {
         const path = window.location.pathname;
         setActiveTab(path.includes('business-employees') ? 1 : 0);
     }, [window.location.pathname]);
+
+    const [formData, setFormData] = React.useState({
+        businessName: '',
+        businessEmail: '',
+        contactPersonTitle: '',
+        phoneNumber: '',
+        businessType: '',
+        address: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+
+        if (errors[name]) {
+            setErrors(prev => ({
+                ...prev,
+                [name]: ''
+            }));
+        }
+    };
+
+
 
     return (
         <Box
@@ -155,18 +186,57 @@ const BusinessEmployees = () => {
                 </Paper>
 
                 {/* Employee List/Form Content */}
-                <Box sx={{ mt: 3 }}>
-                    <Typography variant="h6" sx={{ mb: 2, fontWeight: 500 }}>
-                        Employee Management
-                    </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <CustomTextField
+                    fullWidth
+                    label="Employee Name"
+                    name="businessName"
+                    value={formData.businessName}
+                    onChange={handleChange}
+                    error={!!errors.businessName}
+                    helperText={errors.businessName}
+                    variant="outlined"
+                    margin="none"
+                    placeholder="Enter your business name"
+                />
 
-                    {/* Add your employee management UI here */}
-                    <Box sx={{ textAlign: 'center', py: 4 }}>
-                        <Typography color="text.secondary">
-                            Employee management content will go here
-                        </Typography>
-                    </Box>
-                </Box>
+
+                <CustomTextField
+                    fullWidth
+                    label="Employee Email"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    error={!!errors.address}
+                    helperText={errors.address}
+                    variant="outlined"
+                    margin="none"
+                    multiline
+                    placeholder="Enter full business address"
+                />
+
+                <CustomTextField
+                    fullWidth
+                    label="Contact Person Title"
+                    name="contactPersonTitle"
+                    value={formData.contactPersonTitle}
+                    onChange={handleChange}
+                    variant="outlined"
+                    margin="none"
+                    placeholder="e.g., Owner, Manager"
+                />
+
+                <CustomTextField
+                    fullWidth
+                    label="Business Type"
+                    name="contactPersonTitle"
+                    value={formData.contactPersonTitle}
+                    onChange={handleChange}
+                    variant="outlined"
+                    margin="none"
+                    placeholder="Select business type"
+                />
+            </Box>
             </Box>
         </Box>
     );
