@@ -222,7 +222,6 @@ const VerificationCode = () => {
                     ))}
                 </Box>
 
-
                 <CustomButton
                     type="submit"
                     variant="contained"
@@ -243,6 +242,7 @@ const VerificationCode = () => {
                 >
                     {isLoading ? 'Verifying...' : 'Next'}
                 </CustomButton>
+
             </Box>
         </Box>
     );
